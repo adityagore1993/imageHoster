@@ -12,7 +12,7 @@
 <h2>Please Register:</h2>
 
 <!-- Get the details of the user to be registered and call the controller method mapped with request pattern '/users/registration' and accepting the request of type POST-->
-<form th:action="@{/users/registration}" th:method="POST" th:object="${User}">
+<form th:action="@{/users/registration}" th:method="POST" th:object="${User}" modelAttribute = "User">
 
     <label for="username">Username:</label>
     <input type="text" id="username" name="username" th:field="${User.username}"/>
