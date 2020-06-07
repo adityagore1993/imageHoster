@@ -1,6 +1,7 @@
 package ImageHoster.service;
 
 import ImageHoster.model.Image;
+import ImageHoster.model.User;
 import ImageHoster.repository.ImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,6 +45,15 @@ public class ImageService {
     //The method calls the deleteImage() method in the Repository and passes the Image id of the image to be deleted in the database
     public void deleteImage(Integer imageId) {
         imageRepository.deleteImage(imageId);
+    }
+
+    //The method compares the user trying to edit/delete the image with the user who uploaded the image, returns true if both are same else returns false.
+    public boolean userAuthentication(User user, Image image){
+        if(user.getId() == image.getUser().getId()){
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }
