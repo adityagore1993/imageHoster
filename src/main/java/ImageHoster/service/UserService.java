@@ -5,12 +5,25 @@ import ImageHoster.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 @Service
 public class UserService {
 
+    private static final String PASSWORD_PATTERN = "((?=.*\\d)(?=.*[A-z])(?=.*[@#$%]).{3,20})";
+
     @Autowired
     private UserRepository userRepository;
+    private Pattern pattern;
+    private Matcher matcher;
 
+
+    public boolean validatePassword(final String password){
+        pattern = Pattern.compile(PASSWORD_PATTERN);
+        matcher = pattern.matcher(password);
+        return matcher.matches();
+    }
     //Call the registerUser() method in the UserRepository class to persist the user record in the database
     public void registerUser(User newUser) {
         userRepository.registerUser(newUser);
